@@ -1,15 +1,11 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      th:include="layout :: page">
 <head>
 <title>Add Categories</title>
-<link rel="stylesheet" th:href="@{/css/tax-return.css}"
-	href="../static/css/tax-return.css" />
-<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 </head>
 <body>
-	<div th:include="common :: header"></div>
-	<div th:include="common :: menu_left_categories"></div>
-	<div id="content">
+	<div th:fragment="content">
 		<h1>Add A Category</h1>
 		
 		<form action="#" th:action="@{/categories}" th:object="${category}" method="post">
@@ -26,6 +22,5 @@
         </form>
         
 	</div>
-	<div th:include="common :: footer"></div>
 </body>
 </html>

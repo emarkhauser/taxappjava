@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.validation.Valid;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,8 @@ import ca.markhauser.taxappjava.service.CategoryService;
 @Controller
 @RequestMapping("/categories")
 public class CategoryController {
+	
+	static Logger log = Logger.getLogger(CategoryController.class.getName());
 	
 	@Autowired
 	private CategoryService categoryService;
@@ -50,7 +53,7 @@ public class CategoryController {
 	// Create Action
 	
     @RequestMapping(method=RequestMethod.POST)
-    public String create(@Valid @ModelAttribute Category category, Model model, BindingResult bindingResult) {
+    public String create(@Valid @ModelAttribute Category category, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
         	return createform;
         }
@@ -77,8 +80,7 @@ public class CategoryController {
 	// Update Action
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public String update(@Valid @PathVariable("id") long id, BindingResult bindingResult) {
-		Category category = categoryService.read(id);
+	public String update(@PathVariable("id") long id, @Valid @ModelAttribute Category category, BindingResult bindingResult) {
 		
         if (bindingResult.hasErrors()) {
         	return updateform;

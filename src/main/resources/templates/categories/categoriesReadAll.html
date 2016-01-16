@@ -1,15 +1,13 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      th:include="layout :: page">
 <head>
 <title>Categories List</title>
-<link rel="stylesheet" th:href="@{/css/tax-return.css}"
-	href="../static/css/tax-return.css" />
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<div th:include="common :: header"></div>
-	<div th:include="common :: menu_left_categories"></div>
-	<div id="content">
+	<div th:fragment="content">
+	
+		<a href="categoriesCreateForm.html" th:href="@{/categories/create}">Add Categories</a> 
 	
 		<table>
 			<thead>
@@ -42,6 +40,5 @@
 			</tbody>
 		</table>
 	</div>
-	<div th:include="common :: footer"></div>
 </body>
 </html>
