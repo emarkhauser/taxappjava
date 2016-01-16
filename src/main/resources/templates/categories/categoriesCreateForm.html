@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Add Categories</title>
+<link rel="stylesheet" th:href="@{/css/tax-return.css}"
+	href="../static/css/tax-return.css" />
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+</head>
+<body>
+	<div th:include="common :: header"></div>
+	<div th:include="common :: menu_left_categories"></div>
+	<div id="content">
+		<h1>Add A Category</h1>
+		
+		<form action="#" th:action="@{/categories}" th:object="${category}" method="post">
+            <table>
+                <tr>
+                    <td>Name:</td>
+                    <td><input type="text" th:field="*{name}"/></td>
+                    <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>
+                </tr>
+                <tr>
+                    <td><button type="submit">Submit</button></td>
+                </tr>
+            </table>
+        </form>
+        
+	</div>
+	<div th:include="common :: footer"></div>
+</body>
+</html>

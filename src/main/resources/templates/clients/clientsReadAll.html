@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Clients List</title>
+<link rel="stylesheet" th:href="@{/css/tax-return.css}"
+	href="../static/css/tax-return.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<div th:include="common :: header"></div>
+	<div th:include="common :: menu_left_categories"></div>
+	<div id="content">
+		<table>
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="client : ${list}">
+					<td th:text="${client.id}">34987498374893</td>
+					<td th:text="${client.name}">Category 1</td>
+					<td>
+						<form action="#" th:action="@{/clients/} + ${client.id}" method="get">
+							<button type="submit">View Category</button>
+						</form>
+					</td>
+					<td>
+						<form action="#" th:action="@{/clients/} + ${client.id} + @{/update}" method="get">
+							<button type="submit">Update Category</button>
+						</form>
+					</td>					
+					<td>clients
+						<form action="#" th:action="@{/clients/} + ${client.id}" method="post">
+							<input type="hidden" name="_method" value="delete" />
+							<button type="submit">Delete Category</button>
+						</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div th:include="common :: footer"></div>
+</body>
+</html>

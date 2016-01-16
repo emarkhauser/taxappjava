@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<link rel="stylesheet" th:href="@{/css/tax-return.css}"
+	href="../static/css/tax-return.css" />
+</head>
+
+<body>
+
+	<div th:fragment="header">
+
+		<div id="menu">
+			<ul>
+				<li><a href="home.html" th:href="@{/}" title="Home">Home</a></li>
+				<li><a href="" title="Income">Income</a></li>
+				<li><a href="" title="Expenses">Expenses</a></li>
+				<li><a href="categoriesList.html" th:href="@{/categories}"
+					title="Categories">Categories</a></li>
+				<li><a href="" title="Clients">Clients</a></li>
+			</ul>
+		</div>
+		<div id="header">Tax Return Software</div>
+
+	</div>
+
+	<div th:fragment="menu_left_categories">
+		<div id = "menu_left" >
+			<div>Category</div>
+			<div>
+				<ul>
+					<li><a href="categoriesCreateForm.html" th:href="@{/categories/create}" title="Add Category">Add Category</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<div th:fragment="content">
+		<div id="content">Content placeholder</div>
+	</div>
+
+	<div th:fragment="footer">
+		<div id="footer" style="clear:both;">Erik Markhauser Software</div>
+	</div>
+
+</body>
+
+</html>

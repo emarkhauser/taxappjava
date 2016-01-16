@@ -20,8 +20,6 @@ public class Client {
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private long id;
 	
-	private long clientId;
-	
 	@NotNull
 	@NotBlank
 	private String name;

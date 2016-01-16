@@ -20,8 +20,6 @@ public class Category {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
-	private long categoryId;
-	
 	@NotNull
 	@NotBlank
 	private String name;
@@ -32,9 +30,13 @@ public class Category {
 	public Category (String name) {
 		this.name = name;
 	}
+	
+	public long getId() {
+		return this.id;
+	}
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public void setName(String name) {
