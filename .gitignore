@@ -1,4 +1,11 @@
 .mvn/
+
 mvn*
+
 target/
+
 spring-init
+
+bin/
+.settings/
+.project
