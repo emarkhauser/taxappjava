@@ -17,8 +17,7 @@ public class CategoryService {
 	private CategoryRepository categoryRepository;
 
 	public Category create(Category entity) {
-		Category entityReturn = categoryRepository.save(entity);
-		return entityReturn;
+		return categoryRepository.save(entity);
 	}
 
 	public List<Category> readAll() {

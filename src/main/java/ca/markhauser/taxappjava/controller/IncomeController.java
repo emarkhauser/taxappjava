@@ -14,31 +14,31 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import ca.markhauser.taxappjava.model.Client;
-import ca.markhauser.taxappjava.service.ClientService;
+import ca.markhauser.taxappjava.model.Income;
+import ca.markhauser.taxappjava.service.IncomeService;
 
 @Controller
-@RequestMapping("/clients")
-public class ClientController {
+@RequestMapping("/incomes")
+public class IncomeController {
 	
-	static Logger log = Logger.getLogger(ClientController.class.getName());
+	static Logger log = Logger.getLogger(IncomeController.class.getName());
 	
 	@Autowired
-	private ClientService clientService;
+	private IncomeService incomeService;
 	
-	private final String createform = "clients/clientsCreateForm";
-	private final String updateform = "clients/clientsUpdateForm";
-	private final String mainTemplate = "clients/clientsReadAll";
-	private final String redirectMain = "redirect:/clients";
-	private final String clientName = "client";
-	private final String clientsName = "clients";
+	private final String createform = "incomes/incomesCreateForm";
+	private final String updateform = "incomes/incomesUpdateForm";
+	private final String mainTemplate = "incomes/incomesReadAll";
+	private final String redirectMain = "redirect:/incomes";
+	private final String incomeName = "income";
+	private final String incomesName = "incomes";
 	
 	// Read All
 
 	@RequestMapping(method=RequestMethod.GET)
     public String readAll(Model model) {
-		ArrayList<Client> clients = (ArrayList<Client>) clientService.readAll();
-        model.addAttribute(clientsName, clients);
+		ArrayList<Income> incomes = (ArrayList<Income>) incomeService.readAll();
+        model.addAttribute(incomesName, incomes);
         return mainTemplate;
     }
 	
@@ -46,18 +46,18 @@ public class ClientController {
 	
 	@RequestMapping(value="/create", method=RequestMethod.GET)
     public String createForm(Model model) {
-        model.addAttribute(clientName, new Client());
+        model.addAttribute(incomeName, new Income());
         return createform;
     }
 	
 	// Create Action
 	
     @RequestMapping(method=RequestMethod.POST)
-    public String create(@Valid @ModelAttribute Client client, BindingResult bindingResult) {
+    public String create(@Valid @ModelAttribute Income income, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
         	return createform;
         }
-    	clientService.create(client);
+    	incomeService.create(income);
         return redirectMain;
     }
     
@@ -65,7 +65,7 @@ public class ClientController {
     
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
     public String read(@PathVariable("id") long id, Model model) {
-        model.addAttribute(clientName, clientService.read(id));
+        model.addAttribute(incomeName, incomeService.read(id));
         return updateform;
     }
 	
@@ -73,20 +73,20 @@ public class ClientController {
 	
 	@RequestMapping(value="/{id}/update", method=RequestMethod.GET)
 	public String updateForm(@PathVariable("id") long id, Model model) {
-		model.addAttribute(clientName, clientService.read(id));
+		model.addAttribute(incomeName, incomeService.read(id));
 		return updateform;
     }
 	
 	// Update Action
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public String update(@PathVariable("id") long id, @Valid @ModelAttribute Client client, BindingResult bindingResult) {
+	public String update(@PathVariable("id") long id, @Valid @ModelAttribute Income income, BindingResult bindingResult) {
 		
         if (bindingResult.hasErrors()) {
         	return updateform;
         }
         
-        clientService.update(client);
+        incomeService.update(income);
         return redirectMain;
 	}
 
@@ -94,7 +94,7 @@ public class ClientController {
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	public String deleteEntity(@PathVariable("id") long id) {
-		clientService.delete(id);
+		incomeService.delete(id);
 		return redirectMain;
 	}
 
