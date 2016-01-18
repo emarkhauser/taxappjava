@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import ca.markhauser.taxappjava.model.Expense;
+import ca.markhauser.taxappjava.service.CategoryService;
 import ca.markhauser.taxappjava.service.ExpenseService;
 
 @Controller
@@ -25,6 +26,9 @@ public class ExpenseController {
 	
 	@Autowired
 	private ExpenseService expenseService;
+	
+	@Autowired
+	private CategoryService categoryService;
 	
 	private final String createform = "expenses/expensesCreateForm";
 	private final String updateform = "expenses/expensesUpdateForm";
@@ -46,6 +50,7 @@ public class ExpenseController {
 	
 	@RequestMapping(value="/create", method=RequestMethod.GET)
     public String createForm(Model model) {
+		model.addAttribute("categories", categoryService.readAll());
         model.addAttribute(expenseName, new Expense());
         return createform;
     }

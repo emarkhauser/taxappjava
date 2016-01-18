@@ -31,7 +31,14 @@ public class Expense {
 	private Double hst;
 	
 	public Expense() {
-		
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public Double getAmount() {

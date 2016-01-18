@@ -1,16 +1,12 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" th:include="layout :: page">
 <head>
 <title>Tax Return Application</title>
-<link rel="stylesheet" th:href="@{/css/tax-return.css}"
-	href="../static/css/tax-return.css" />
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<div th:include="common :: header"></div>
-	<div id="content">
-		<h1>Tax Return Software</h1>
+	<div th:fragment="content">
+		<h1>Tax Recording Application</h1>
+		<p>Record your small business income and expenses for easier recording at tax time.</p>
 	</div>
-	<div th:include="common :: footer"></div>
 </body>
 </html>

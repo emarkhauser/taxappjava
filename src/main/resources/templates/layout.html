@@ -28,13 +28,12 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Tax Recording Application</a>
+				<a class="navbar-brand" th:href="@{/}" href="/">Tax Recording Application</a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li><a th:href="@{/}" href="#">Home</a></li>
-					<li><a th:href="@{/income}" href="/income/incomeReadAll.html">Income</a></li>
-					<li><a th:href="@{/expense}" href="/expenses/expensesReadAll.html">Expense</a></li>
+					<li><a th:href="@{/incomes}" href="/income/incomeReadAll.html">Income</a></li>
+					<li><a th:href="@{/expenses}" href="/expenses/expensesReadAll.html">Expense</a></li>
 					<li><a th:href="@{/clients}" href="/clients/clientsReadAll.html">Clients</a></li>
 					<li><a th:href="@{/categories}" href="/categories/categoriesReadAll.html">Categories</a></li>
 				</ul>

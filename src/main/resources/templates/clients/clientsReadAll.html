@@ -7,9 +7,9 @@
 <body>
 	<div th:fragment="content">
 	
-		<a href="clientsCreateForm.html" th:href="@{/clients/create}">Add Clients</a> 
+		<a href="clientsCreateForm.html" th:href="@{/clients/create}">Add Clients</a>
 	
-		<table>
+		<table class="table table-striped">
 			<thead>
 				<tr>
 					<th>ID</th>
@@ -22,18 +22,13 @@
 					<td th:text="${client.name}">Client 1</td>
 					<td>
 						<form action="#" th:action="@{/clients/} + ${client.id}" method="get">
-							<button type="submit">View Client</button>
+							<button type="submit" class="btn btn-primary">View Client</button>
 						</form>
-					</td>
-					<td>
-						<form action="#" th:action="@{/clients/} + ${client.id} + @{/update}" method="get">
-							<button type="submit">Update Client</button>
-						</form>
-					</td>					
+					</td>			
 					<td>
 						<form action="#" th:action="@{/clients/} + ${client.id}" method="post">
 							<input type="hidden" name="_method" value="delete" />
-							<button type="submit">Delete Client</button>
+							<button type="submit" class="btn btn-danger">Delete Client</button>
 						</form>
 					</td>
 				</tr>
