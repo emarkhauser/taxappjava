@@ -6,7 +6,7 @@
 </head>
 <body>
 	<div th:fragment="content">
-		<h1>Update A Client</h1>
+		<h1>Update a Client</h1>
 		
 		<form action="#" th:action="@{/clients/} + ${client.id}" th:object="${client}" method="post">
 			<input type="hidden" name="_method" value="put" />
