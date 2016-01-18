@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" th:include="layout :: page">
+<head>
+<title>Incomes List</title>
+</head>
+<body>
+	<div th:fragment="content">
+
+		<a href="incomesCreateForm.html" th:href="@{/incomes/create}">Add
+			Incomes</a>
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Particulars</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="income : ${incomes}">
+					<td th:text="${income.id}">34987498374893</td>
+					<td th:text="${income.particulars}">Income 1</td>
+					<td>
+						<form action="#" th:action="@{/incomes/} + ${income.id}"
+							method="get">
+							<button type="submit" class="btn btn-primary">View Income</button>
+						</form>
+					</td>
+					<td>
+						<form action="#" th:action="@{/incomes/} + ${income.id}"
+							method="post">
+							<input type="hidden" name="_method" value="delete" />
+							<button type="submit" class="btn btn-danger">Delete Income</button>
+						</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

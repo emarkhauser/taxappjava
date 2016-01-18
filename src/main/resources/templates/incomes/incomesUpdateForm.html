@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" th:include="layout :: page">
+<head>
+<title>View/Update Incomes</title>
+</head>
+<body>
+	<div th:fragment="content">
+		<h1>View/Update A Income</h1>
+
+		<form action="#" th:action="@{/incomes/} + ${income.id}"
+			th:object="${income}" method="post">
+			<input type="hidden" name="_method" value="put" />
+			<table>
+				<tr>
+					<td>Particulars:</td>
+					<td><input type="text" th:field="*{particulars}" /></td>
+					<td th:if="${#fields.hasErrors('particulars')}"
+						th:errors="*{particulars}">Particulars Error</td>
+				</tr>
+				<tr>
+					<td>Client:</td>
+					<td><select th:field="*{client}" class="form-control">
+							<option th:each="client: ${clients}"
+								th:value="${client.id}" th:text="${client.name}"></option>
+					</select></td>
+					<td th:if="${#fields.hasErrors('client')}"
+						th:errors="*{client}">client Error</td>
+				</tr>
+				<tr>
+					<td>Total Sales:</td>
+					<td><input type="text" th:field="*{totalSales}" /></td>
+					<td th:if="${#fields.hasErrors('totalSales')}" th:errors="*{totalSales}">totalSales
+						Error</td>
+				</tr>
+				<tr>
+					<td>HST:</td>
+					<td><input type="text" th:field="*{hst}" /></td>
+					<td th:if="${#fields.hasErrors('hst')}" th:errors="*{hst}">hst
+						Error</td>
+				</tr>
+				<tr>
+					<td><button type="submit" class="btn btn-success">Submit</button></td>
+				</tr>
+			</table>
+		</form>
+
+	</div>
+</body>
+</html>
