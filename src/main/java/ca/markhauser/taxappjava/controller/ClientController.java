@@ -69,14 +69,6 @@ public class ClientController {
         return updateform;
     }
 	
-	// Update Form
-	
-	@RequestMapping(value="/{id}/update", method=RequestMethod.GET)
-	public String updateForm(@PathVariable("id") long id, Model model) {
-		model.addAttribute(clientName, clientService.read(id));
-		return updateform;
-    }
-	
 	// Update Action
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)

@@ -2,7 +2,6 @@ package ca.markhauser.taxappjava.model;
 
 import java.util.Calendar;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,7 +21,7 @@ public class Expense {
 	
 	private Double amount;
 	
-	@ManyToOne(cascade = {CascadeType.REMOVE})
+	@ManyToOne
 	private Category category;
 	
 	private String note;

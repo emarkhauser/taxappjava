@@ -2,7 +2,6 @@ package ca.markhauser.taxappjava.model;
 
 import java.util.Calendar;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -27,7 +26,7 @@ public class Income {
 	private double totalSales;
 	private double paymentOnAccount;
 	
-	@ManyToOne(cascade = {CascadeType.REMOVE})
+	@ManyToOne
 	private Client client;
 	
 	private Calendar calendar;

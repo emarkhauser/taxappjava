@@ -14,12 +14,14 @@
 				<tr>
 					<th>ID</th>
 					<th>Particulars</th>
+					<th>Amount</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="expense : ${expenses}">
 					<td th:text="${expense.id}">34987498374893</td>
 					<td th:text="${expense.particulars}">Expense 1</td>
+					<td th:text="${expense.amount}">45.00</td>
 					<td>
 						<form action="#" th:action="@{/expenses/} + ${expense.id}"
 							method="get">

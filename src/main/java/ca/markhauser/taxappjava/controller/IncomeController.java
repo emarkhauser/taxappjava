@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import ca.markhauser.taxappjava.model.Income;
-import ca.markhauser.taxappjava.service.CategoryService;
+import ca.markhauser.taxappjava.service.ClientService;
 import ca.markhauser.taxappjava.service.IncomeService;
 
 @Controller
@@ -28,7 +28,7 @@ public class IncomeController {
 	private IncomeService incomeService;
 	
 	@Autowired
-	private CategoryService clientService;
+	private ClientService clientService;
 	
 	private final String createform = "incomes/incomesCreateForm";
 	private final String updateform = "incomes/incomesUpdateForm";
@@ -70,16 +70,9 @@ public class IncomeController {
     
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
     public String read(@PathVariable("id") long id, Model model) {
+		model.addAttribute("clients", clientService.readAll());
         model.addAttribute(incomeName, incomeService.read(id));
         return updateform;
-    }
-	
-	// Update Form
-	
-	@RequestMapping(value="/{id}/update", method=RequestMethod.GET)
-	public String updateForm(@PathVariable("id") long id, Model model) {
-		model.addAttribute(incomeName, incomeService.read(id));
-		return updateform;
     }
 	
 	// Update Action

@@ -70,16 +70,9 @@ public class ExpenseController {
     
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
     public String read(@PathVariable("id") long id, Model model) {
+		model.addAttribute("categories", categoryService.readAll());
         model.addAttribute(expenseName, expenseService.read(id));
         return updateform;
-    }
-	
-	// Update Form
-	
-	@RequestMapping(value="/{id}/update", method=RequestMethod.GET)
-	public String updateForm(@PathVariable("id") long id, Model model) {
-		model.addAttribute(expenseName, expenseService.read(id));
-		return updateform;
     }
 	
 	// Update Action

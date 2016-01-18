@@ -69,14 +69,6 @@ public class CategoryController {
         return updateform;
     }
 	
-	// Update Form
-	
-	@RequestMapping(value="/{id}/update", method=RequestMethod.GET)
-	public String updateForm(@PathVariable("id") long id, Model model) {
-		model.addAttribute(categoryName, categoryService.read(id));
-		return updateform;
-    }
-	
 	// Update Action
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
