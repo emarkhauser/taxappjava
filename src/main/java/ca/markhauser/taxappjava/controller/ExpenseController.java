@@ -1,10 +1,7 @@
 package ca.markhauser.taxappjava.controller;
 
-import java.util.ArrayList;
-
 import javax.validation.Valid;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,34 +13,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import ca.markhauser.taxappjava.model.Expense;
 import ca.markhauser.taxappjava.service.CategoryService;
-import ca.markhauser.taxappjava.service.ExpenseService;
+import ca.markhauser.taxappjava.service.EntityService;
 
 @Controller
 @RequestMapping("/expenses")
-public class ExpenseController {
-
-	static Logger log = Logger.getLogger(ExpenseController.class.getName());
-
-	@Autowired
-	private ExpenseService expenseService;
+public class ExpenseController extends AbstractEntityController<Expense> {
 
 	@Autowired
 	private CategoryService categoryService;
-
-	private final String createform = "expenses/expensesCreateForm";
-	private final String updateform = "expenses/expensesUpdateForm";
-	private final String mainTemplate = "expenses/expensesReadAll";
-	private final String redirectMain = "redirect:/expenses";
-	private final String expenseName = "expense";
-	private final String expensesName = "expenses";
+	
+	@Autowired
+	public ExpenseController(EntityService<Expense> service) {
+		super(service, "expense", "expenses");
+	}
 
 	// Read All
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String readAll(Model model) {
-		ArrayList<Expense> expenses = (ArrayList<Expense>) expenseService.readAll();
-		model.addAttribute(expensesName, expenses);
-		return mainTemplate;
+		return super.readAll(model);
 	}
 
 	// Create Form
@@ -51,19 +39,14 @@ public class ExpenseController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String createForm(Model model) {
 		model.addAttribute("categories", categoryService.readAll());
-		model.addAttribute(expenseName, new Expense());
-		return createform;
+		return super.createForm(model);
 	}
 
 	// Create Action
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String create(@Valid @ModelAttribute Expense expense, BindingResult bindingResult) {
-		if (bindingResult.hasErrors()) {
-			return createform;
-		}
-		expenseService.create(expense);
-		return redirectMain;
+		return super.create(expense, bindingResult);
 	}
 
 	// Read
@@ -71,8 +54,7 @@ public class ExpenseController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String read(@PathVariable("id") long id, Model model) {
 		model.addAttribute("categories", categoryService.readAll());
-		model.addAttribute(expenseName, expenseService.read(id));
-		return updateform;
+		return super.read(id, model);
 	}
 
 	// Update Action
@@ -80,21 +62,14 @@ public class ExpenseController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public String update(@PathVariable("id") long id, @Valid @ModelAttribute Expense expense,
 			BindingResult bindingResult) {
-
-		if (bindingResult.hasErrors()) {
-			return updateform;
-		}
-
-		expenseService.update(expense);
-		return redirectMain;
+		return super.update(id, expense, bindingResult);
 	}
 
 	// Delete Action
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public String deleteEntity(@PathVariable("id") long id) {
-		expenseService.delete(id);
-		return redirectMain;
+		return super.deleteEntity(id);
 	}
 
 }

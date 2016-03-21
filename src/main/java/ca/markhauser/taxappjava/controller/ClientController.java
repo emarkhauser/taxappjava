@@ -1,10 +1,7 @@
 package ca.markhauser.taxappjava.controller;
 
-import java.util.ArrayList;
-
 import javax.validation.Valid;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,58 +12,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import ca.markhauser.taxappjava.model.Client;
-import ca.markhauser.taxappjava.service.ClientService;
+import ca.markhauser.taxappjava.service.EntityService;
 
 @Controller
 @RequestMapping("/clients")
-public class ClientController {
-
-	static Logger log = Logger.getLogger(ClientController.class.getName());
-
+public class ClientController extends AbstractEntityController<Client> {
+	
 	@Autowired
-	private ClientService clientService;
-
-	private final String createform = "clients/clientsCreateForm";
-	private final String updateform = "clients/clientsUpdateForm";
-	private final String mainTemplate = "clients/clientsReadAll";
-	private final String redirectMain = "redirect:/clients";
-	private final String clientName = "client";
-	private final String clientsName = "clients";
-
+	public ClientController(EntityService<Client> service) {
+		super(service, "client", "clients");
+	}
+	
 	// Read All
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String readAll(Model model) {
-		ArrayList<Client> clients = (ArrayList<Client>) clientService.readAll();
-		model.addAttribute(clientsName, clients);
-		return mainTemplate;
+		return super.readAll(model);
 	}
 
 	// Create Form
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String createForm(Model model) {
-		model.addAttribute(clientName, new Client());
-		return createform;
+		return super.createForm(model);
 	}
 
 	// Create Action
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String create(@Valid @ModelAttribute Client client, BindingResult bindingResult) {
-		if (bindingResult.hasErrors()) {
-			return createform;
-		}
-		clientService.create(client);
-		return redirectMain;
+		return super.create(client, bindingResult);
 	}
 
 	// Read
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String read(@PathVariable("id") long id, Model model) {
-		model.addAttribute(clientName, clientService.read(id));
-		return updateform;
+		return super.read(id, model);
 	}
 
 	// Update Action
@@ -74,21 +56,14 @@ public class ClientController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public String update(@PathVariable("id") long id, @Valid @ModelAttribute Client client,
 			BindingResult bindingResult) {
-
-		if (bindingResult.hasErrors()) {
-			return updateform;
-		}
-
-		clientService.update(client);
-		return redirectMain;
+		return super.update(id, client, bindingResult);
 	}
 
 	// Delete Action
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public String deleteEntity(@PathVariable("id") long id) {
-		clientService.delete(id);
-		return redirectMain;
+		return super.deleteEntity(id);
 	}
 
 }

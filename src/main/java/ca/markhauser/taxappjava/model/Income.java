@@ -9,12 +9,16 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 /**
  * Domain model for income model
  * @author Erik Markhauser
  */
 @Entity
+@Component("income")
+@Scope("prototype")
 public class Income {
 	
 	@Id

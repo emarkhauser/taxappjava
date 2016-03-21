@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 /**
  * Domain entity for client model
@@ -14,6 +16,8 @@ import org.hibernate.validator.constraints.NotBlank;
  *
  */
 @Entity
+@Component("client")
+@Scope("prototype")
 public class Client {
 	
 	@Id

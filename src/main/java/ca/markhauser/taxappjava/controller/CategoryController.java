@@ -20,8 +20,7 @@ public class CategoryController extends AbstractEntityController<Category> {
 
 	@Autowired
 	public CategoryController(EntityService<Category> service) {
-		super(service, "categories/categoriesCreateForm", "categories/categoriesUpdateForm",
-				"categories/categoriesReadAll", "redirect:/categories", "category", "categories");
+		super(service, "category", "categories");
 	}
 
 	// Read All

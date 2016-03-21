@@ -8,11 +8,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 /**
  * Domain entity for expense model
  * @author Erik Markhauser
  */
 @Entity
+@Component("expense")
+@Scope("prototype")
 public class Expense {
 
 	@Id

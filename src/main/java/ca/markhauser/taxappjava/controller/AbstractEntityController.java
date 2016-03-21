@@ -24,13 +24,12 @@ public abstract class AbstractEntityController<T> implements EntityController<T>
 
 	private String createform, updateform, mainTemplate, redirectMain, entityName, entitiesName;
 
-	public AbstractEntityController(EntityService<T> service, String createform, String updateform,
-			String mainTemplate, String redirectMain, String entityName, String entitiesName) {
+	public AbstractEntityController(EntityService<T> service, String entityName, String entitiesName) {
 		this.service = service;
-		this.createform = createform;
-		this.updateform = updateform;
-		this.mainTemplate = mainTemplate;
-		this.redirectMain = redirectMain;
+		this.createform = entitiesName + "/" + entitiesName + "CreateForm";
+		this.updateform = entitiesName + "/" + entitiesName + "UpdateForm";
+		this.mainTemplate = entitiesName + "/" + entitiesName + "ReadAll";
+		this.redirectMain = "redirect:/" + entitiesName;
 		this.entityName = entityName;
 		this.entitiesName = entitiesName;
 	}
@@ -43,7 +42,6 @@ public abstract class AbstractEntityController<T> implements EntityController<T>
 	 * @see ca.markhauser.taxappjava.controller.EntityController#readAll(org.
 	 * springframework.ui.Model)
 	 */
-	@RequestMapping(method = RequestMethod.GET)
 	public String readAll(Model model) {
 		ArrayList<T> categories = (ArrayList<T>) service.readAll();
 		model.addAttribute(entitiesName, categories);
@@ -58,7 +56,6 @@ public abstract class AbstractEntityController<T> implements EntityController<T>
 	 * @see ca.markhauser.taxappjava.controller.EntityController#createForm(org.
 	 * springframework.ui.Model)
 	 */
-	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String createForm(Model model) {
 		T entity = (T) appContext.getBean(this.entityName);
 		model.addAttribute(entityName, entity);
@@ -73,7 +70,6 @@ public abstract class AbstractEntityController<T> implements EntityController<T>
 	 * @see ca.markhauser.taxappjava.controller.EntityController#create(T,
 	 * org.springframework.validation.BindingResult)
 	 */
-	@RequestMapping(method = RequestMethod.POST)
 	public String create(@Valid @ModelAttribute T entity, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			return createform;
@@ -90,7 +86,6 @@ public abstract class AbstractEntityController<T> implements EntityController<T>
 	 * @see ca.markhauser.taxappjava.controller.EntityController#read(long,
 	 * org.springframework.ui.Model)
 	 */
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String read(@PathVariable("id") long id, Model model) {
 		model.addAttribute(entityName, service.read(id));
 		return updateform;
@@ -104,7 +99,6 @@ public abstract class AbstractEntityController<T> implements EntityController<T>
 	 * @see ca.markhauser.taxappjava.controller.EntityController#update(long, T,
 	 * org.springframework.validation.BindingResult)
 	 */
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public String update(@PathVariable("id") long id, @Valid @ModelAttribute T entity, BindingResult bindingResult) {
 
 		if (bindingResult.hasErrors()) {
@@ -123,7 +117,6 @@ public abstract class AbstractEntityController<T> implements EntityController<T>
 	 * @see
 	 * ca.markhauser.taxappjava.controller.EntityController#deleteEntity(long)
 	 */
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public String deleteEntity(@PathVariable("id") long id) {
 		service.delete(id);
 		return redirectMain;
